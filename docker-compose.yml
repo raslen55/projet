@@ -6,38 +6,37 @@ services:
     container_name: mysqldb
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=foyer_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: foyer_db
     ports:
-      - 3306:3306
+      - "3306:3306"
     networks:
       - network
     volumes:
-      - data-volume_bloc:/var/lib/mysql
+      - data-volume-bloc:/var/lib/mysql
 
   app-foyer:
     depends_on:
       - mysqldb
     image: raslen166/tp-foyer-bloc:latest
+    container_name: app-foyer
     restart: on-failure
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/foyer_db?createDatabaseIfNotExist=true
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.cj.jdbc.Driver
-      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
-      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/foyer_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
     ports:
-      - 8082:8082
+      - "8082:8082"
     networks:
       - network
     stdin_open: true
     tty: true
 
- 
-
 volumes:
-  data-volume_bloc:
+  data-volume-bloc:
 
 networks:
   network:
