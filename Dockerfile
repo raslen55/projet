@@ -2,7 +2,7 @@ FROM openjdk:17-jdk-alpine
 EXPOSE 8082
 
 # Set Nexus repository details
-ARG NEXUS_URL=http://10.0.0.18:8081/repository/maven-releases
+ARG NEXUS_URL=http://192.168.137.200:8081/repository/maven-releases
 ARG JAR_PATH=tn/esprit/tp-foyer/1.0.0/tp-foyer-1.0.0.jar
 
 # Download the JAR file from Nexus
