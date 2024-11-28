@@ -18,7 +18,7 @@ services:
   app-foyer:
     depends_on:
       - mysqldb
-    image: lou4y/tp-foyer-bloc:latest
+    image: raslen166/tp-foyer-bloc:latest
     restart: on-failure
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/foyer_db?createDatabaseIfNotExist=true
@@ -34,16 +34,7 @@ services:
     stdin_open: true
     tty: true
 
-  frontend:
-    image: localhost:5000/bloc-frontend-dev:latest
-    environment:
-      - API_URL=http://localhost:8082/tpfoyer/bloc
-    ports:
-      - 4200:4200
-    networks:
-      - network
-    depends_on:
-      - app-foyer
+ 
 
 volumes:
   data-volume_bloc:
